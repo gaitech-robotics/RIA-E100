@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="paused" value="false"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)xacro '$(find e100_description)/include/urdf/ria_e100_gazebo.urdf.xacro'"/>
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model ria -param robot_description"/>
+
+  <rosparam file="$(find e100_sim)/controller/gazebo_diff_control.yaml" command="load"/>
+
+  <node name="base_controller_spawner" pkg="controller_manager" type="spawner"  args="ria_base_controller ria_joint_state_controller" respawn="false" output="screen"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+</launch>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package>
+  <name>e100_sim</name>
+  <version>0.0.0</version>
+  <description> This package includes for simulation of RIA-E100 </description>
+  <maintainer email="viswanath@gaitech.net"> Viswanath </maintainer>
+  <maintainer email="shlee@gaitech.kr"> Brighten Lee </maintainer>
+  <maintainer email="chenlinkai@gaitech.net"> Leo Chen </maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <export>
+  </export>
+</package>

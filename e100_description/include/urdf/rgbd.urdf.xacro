@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<robot name="RIA-E100_RGBD" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="camera_visual"  default="true"/>
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+ 
+  <link name="camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://e100_description/include/meshes/sensors/orbbec_astra.stl"/>
+      </geometry>
+      <material name="Dark_Grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0.003 0.065 0.007" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.012 0.132 0.020"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="camera_rgb_frame"/>
+
+  <link name="camera_rgb_optical_frame"/>
+
+  <link name="camera_depth_frame"/>
+
+  <link name="camera_depth_optical_frame"/>
+
+  <joint name="base_link_to_camera_link" type="fixed">
+    <origin xyz="0.05 0 0.168" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+  </joint>
+
+  <joint name="camera_rgb_joint" type="fixed">
+    <origin xyz="0.0 -0.0125 -0.0150" rpy="0 0 0"/>
+    <parent link="camera_link"/>
+    <child link="camera_rgb_frame"/>
+  </joint>
+
+  <joint name="camera_rgb_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="camera_rgb_frame"/>
+    <child link="camera_rgb_optical_frame"/>
+  </joint>
+
+  <joint name="camera_depth_joint" type="fixed">
+    <origin xyz="0.0 -0.0125 -0.0150" rpy="0 0 0"/>
+    <parent link="camera_link"/>
+    <child link="camera_depth_frame"/>
+  </joint>
+
+  <joint name="camera_depth_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="camera_depth_frame"/>
+    <child link="camera_depth_optical_frame"/>
+  </joint>
+
+  <sensor_orbbec_astra_gazebo/>
+  
+  <xacro:macro name="sensor_orbbec_astra_gazebo">
+  <gazebo reference="camera_rgb_frame">
+    <sensor type="depth" name="orbbec_astra">
+      <always_on>true</always_on>
+      <visualize>$(arg camera_visual)</visualize>
+      <camera>
+        <horizontal_fov>1.3439</horizontal_fov>
+        <image>
+          <width>1920</width>
+          <height>1080</height>
+          <format>R8G8B8</format>
+        </image>
+        <depth_camera></depth_camera>
+        <clip>
+          <near>0.03</near>
+          <far>100</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_openni_kinect.so">
+        <baseline>0.2</baseline>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate>
+        <cameraName>camera</cameraName>
+        <frameName>camera_rgb_optical_frame</frameName>
+        <imageTopicName>rgb/image_raw</imageTopicName>
+        <depthImageTopicName>depth/image_raw</depthImageTopicName>
+        <pointCloudTopicName>depth/points</pointCloudTopicName>
+        <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+        <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+        <pointCloudCutoff>0.4</pointCloudCutoff>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <CxPrime>0.0</CxPrime>
+        <Cx>0.0</Cx>
+        <Cy>0.0</Cy>
+        <focalLength>0</focalLength>
+        <hackBaseline>0</hackBaseline>
+      </plugin>
+    </sensor>
+  </gazebo>
+  </xacro:macro>
+
+</robot>

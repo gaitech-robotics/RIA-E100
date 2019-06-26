@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot name="RIA-R100-properties" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
+
+  <xacro:property name="M_PI" value="3.1415926535897931"/>
+  <xacro:property name="WHEEL_SIZE" value="0.2"/>
+  <xacro:property name="WHEEL_X" value="0.26"/>
+  <xacro:property name="WHEEL_Y" value="0.33"/>
+  <xacro:property name="BASE_LINK_HEIGHT" value="0.11"/>
+  <xacro:property name="WHEEL_MESH" value="wheel_new.stl"/>
+  <xacro:property name="OMNI_WHEEL_MESH" value="omni_wheel.stl"/>
+
+  <!-- Orbbec Astra Properties-->
+  <property name="orbbec_x" value="0.380"/>
+  <property name="orbbec_y" value="-0.045"/>
+  <property name="orbbec_z" value="0.248"/>
+  <property name="orbbec_depth_x_from_rgb" value="0"/>
+  <property name="orbbec_depth_y_from_rgb" value="0.025"/>
+  <property name="orbbec_depth_z_from_rgb" value="0"/>
+
+  <!-- SICK Lidar Properties -->
+  <property name="laser_x" value="0.420"/>
+  <property name="laser_y" value="0.0"/>
+  <property name="laser_z" value="0.108"/>
+
+ </robot>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+
+
+  <arg name="rviz_config" default="$(find e100_description)/launch/view.launch.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_config)"/>
+
+</launch>

@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<robot name="RIA-E100" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find e100_description)/include/urdf/materials.urdf.xacro"/>
+  <xacro:include filename="$(find e100_description)/include/urdf/property.urdf.xacro"/>
+  <xacro:include filename="$(find e100_description)/include/urdf/wheels.urdf.xacro"/>
+  <xacro:include filename="$(find e100_description)/include/urdf/rplidar.urdf.xacro"/>
+  <xacro:include filename="$(find e100_description)/include/urdf/rgbd.urdf.xacro"/>
+  <xacro:include filename="$(find e100_description)/include/urdf/imu.urdf.xacro"/>
+
+
+  <xacro:macro name="ria_e100" params="base_hw_interface:=hardware_interface/VelocityJointInterface">
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.03 0.03 0.03"/>
+      </geometry>
+      <material name="Green"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.03 0.03 0.03"/>
+      </geometry>
+      <material name="Green"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>   
+  </link>
+
+  <link name="RIA_BASE" >
+    <inertial>
+      <mass value="14"/>
+      <origin rpy=" 0 0 0" xyz="0 0 0"/>
+      <inertia  ixx="2.42811" ixy="0.00503" ixz="0.09703" iyy="2.52291" iyz="0.10757" izz="0.18274"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://e100_description/include/meshes/base.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Army_Green"/>
+      <origin rpy="${M_PI/2} 0 -${M_PI/2}" xyz="0.507 0.182 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://e100_description/include/meshes/base.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="${M_PI/2} 0 -${M_PI/2}" xyz="0.507 0.182 0"/>
+    </collision>      
+  </link>
+
+  <gazebo reference="RIA_BASE">
+    <material>Gazebo/Green</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <link name="RIA_TOP_FRAME">
+    <inertial>
+      <mass value="2"/>
+      <origin rpy=" 0 0 0" xyz="0 0 0"/>
+      <inertia  ixx="1.32565" ixy="0.01804" ixz="0.04757" iyy="1.21648" iyz="0.40330" izz="0.22242" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://e100_description/include/meshes/top_plate.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Dark_Grey"/>
+      <origin rpy="${M_PI/2} 0 -${M_PI/2}" xyz="0.507 0.182 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://e100_description/include/meshes/top_plate.stl" scale="0.001 0.001 0.001"/>
+       </geometry>
+       <origin rpy="${M_PI/2} 0 -${M_PI/2}" xyz="0.507 0.182 0"/>
+    </collision>
+  </link>
+
+  <gazebo reference="RIA_TOP_FRAME">
+    <material>Gazebo/FlatBlack</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <joint name="base_link_to_RIA_BASE" type="fixed">
+    <parent link="base_link"/>
+    <child link="RIA_BASE"/>
+    <origin rpy="0 0 0" xyz="-0.175 0 0"/>
+  </joint>
+
+  <joint name="RIA_BASE_to_RIA_TOP_FRAME" type="fixed">
+    <parent link="RIA_BASE"/>
+    <child link="RIA_TOP_FRAME"/>
+    <origin rpy="0 0 0" xyz="0 0 0.03"/>
+  </joint>
+
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_right_wheel"/>
+    <origin rpy="0 0 0" xyz="0 -0.227 0.025"/>
+    <axis xyz="0 1 0" rpy="0 0 0" />
+    <limit effort="200" velocity="200"/>
+    <joint_properties damping="0" friction="0"/>
+  </joint>
+
+  <transmission name="front_right_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_right_wheel_joint">
+      <hardwareInterface>${base_hw_interface}</hardwareInterface>
+    </joint>
+    <actuator name="front_right_wheel_motor">
+      <hardwareInterface>${base_hw_interface}</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_left_wheel"/>
+    <origin rpy="0 0 0" xyz="0 0.227 0.025"/>
+    <axis xyz="0 1 0" rpy="0 0 0" />
+    <limit effort="200" velocity="200"/>
+    <joint_properties damping="0" friction="0"/>
+  </joint>
+
+  <transmission name="front_left_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_left_wheel_joint">
+      <hardwareInterface>${base_hw_interface}</hardwareInterface>
+    </joint>
+    <actuator name="front_left_wheel_motor">
+      <hardwareInterface>${base_hw_interface}</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <joint name="rear_left_wheel_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rear_left_wheel"/>
+    <origin rpy="0 0 0" xyz="-0.3734 0.12 -0.072"/>
+  </joint>
+
+  <joint name="rear_right_wheel_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rear_right_wheel"/>
+    <origin rpy="0 0 0" xyz="-0.3734 -0.11 -0.072"/>
+  </joint>
+
+  <gazebo reference="front_left_wheel">
+    <mu1 value="10"/>
+    <mu2 value="10"/>
+    <fdir1 value="1 0 0"/>
+    <kp value="10000000.0"/>
+    <kd>1.0</kd>
+    <maxVel>0.5</maxVel>
+    <material>Gazebo/Grey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="front_right_wheel">
+    <mu1 value="10"/>
+    <mu2 value="10"/>
+    <fdir1 value="1 0 0"/>
+    <kp value="10000000.0"/>
+    <kd>1.0</kd>
+    <maxVel>0.5</maxVel>
+    <material>Gazebo/Grey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="rear_left_wheel">
+    <mu1 value="0.1"/>
+    <mu2 value="0.1"/>
+    <fdir1 value="1 0 0"/>
+    <kp value="10000000.0"/>
+    <kd>1.0</kd>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="rear_right_wheel">
+    <mu1 value="0.1"/>
+    <mu2 value="0.1"/>
+    <fdir1 value="1 0 0"/>
+    <kp value="10000000.0"/>
+    <kd>1.0</kd>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  </xacro:macro>  
+</robot>
