@@ -2,6 +2,7 @@
 <launch>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find e100_sim)/launch/office.world"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="debug" value="false"/>
     <arg name="paused" value="false"/>
