@@ -106,3 +106,7 @@ The last step is to launch the navigation file by:
 
 Note: Gazebo Version,
 It is recommended to install at least Gazebo v7.x for full functionlity, (which is installed by default with ROS Kinetic). 
+
+For more demos, please visit the official wiki here 
+
+https://edu.gaitech.hk/ria_e100/installation.html#installation
