@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>e100_teleop</name>
+  <version>0.0.0</version>
+  <description> This package includes files for remote control </description>
+  <maintainer email="viswanath@gaitech.net">vishu</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  <export>
+  </export>
+</package>

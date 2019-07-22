@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="global_frame" default="map"/>
+  <arg name="odom_frame" default="odom"/>
+  <arg name="base_frame" default="base_link"/>
+  <arg name="scan_topic" default="scan"/>
+
+  <!-- Run move_base -->
+  <node pkg="move_base" type="move_base" name="move_base" respawn="false" output="screen">
+    <rosparam file="$(find e100_navigation)/config/move_base_params.yaml" command="load"/>
+    <rosparam file="$(find e100_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find e100_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+    <rosparam file="$(find e100_navigation)/config/local_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find e100_navigation)/config/global_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find e100_navigation)/config/teb_local_planner_params.yaml" command="load"/>
+    <param name="global_costmap/obstacle_layer/scan/topic" value="$(arg scan_topic)"/>
+    <param name="global_costmap/global_frame" value="$(arg global_frame)"/>
+    <param name="global_costmap/robot_base_frame" value="$(arg base_frame)"/>
+    <param name="local_costmap/obstacle_layer/scan/topic" value="$(arg scan_topic)"/>
+    <param name="local_costmap/global_frame" value="$(arg odom_frame)"/>
+    <param name="local_costmap/robot_base_frame" value="$(arg base_frame)"/>
+    <param name="TebLocalPlannerROS/map_frame" value="$(arg global_frame)"/>
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>
+    <remap from="/cmd_vel" to="/ria_base_controller/cmd_vel"/>
+    <remap from="/odom" to="/ria_base_controller/odom"/>
+  </node>
+
+</launch>
