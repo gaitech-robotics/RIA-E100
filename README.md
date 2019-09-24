@@ -43,7 +43,7 @@ To let the robot move you need to send velocity command,  There are currently a 
 
 We will for now just send some constant command velocities to the robot by:
    
-     $rostopic pub /cmd_vel geometry_msgs/Twist "linear: x: 1.0 y: 0.0 z: 0.0 angular: x: 0.0 y: 0.0 z: 0.0"  
+     $rostopic pub /mobile_base_controller/cmd_vel geometry_msgs/Twist "linear: x: 1.0 y: 0.0 z: 0.0 angular: x: 0.0 y: 0.0 z: 0.0"  
 
 
 
@@ -53,11 +53,7 @@ Now, we are goining to send the command to the robot via keypoard by typing the 
         
         $ roslaunch e100_sim keyboard.launch 
         
-• Usage with a joystick
 
-Connect a USB joystick to your computer and launch the file:
-       
-       $ roslaunch e100_sim joy.launch 
 
 Navigation
 
@@ -67,9 +63,9 @@ First launch the robot in the  simulation world by:
 
        $ roslaunch e100_sim gazebo.launch 
 
-Now launch the joy node: 
+Now launch the keyboard node: 
              
-       $roslaunch e100_sim joy.launch
+       $roslaunch e100_sim keyboard.launch
 
 Further, we need to launch the gmapping slam by:
 
