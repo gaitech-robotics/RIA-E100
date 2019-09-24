@@ -55,7 +55,7 @@ Now, we are goining to send the command to the robot via keypoard by typing the 
 
 • Usage with a joystick
 
-Connect a USB joystick to your computer and launch the file:
+Connect a USB joystick to your computer and launch the file(Please check the js port number,default is js1. You can change in the launch file.):
 
        $ roslaunch e100_teleop joy.launch 
         
@@ -102,8 +102,6 @@ The last step is to launch the navigation file by:
 
 
 
-
-  
 
 
 Note: Gazebo Version,
