@@ -2,7 +2,7 @@
 E100_sim Package
 
 E100_sim is a gazebo simulator. It provides the mobile base robot “ria_e100”  model  with simulated sensors such as the IMU, odometry sensor, and the rplidar, rgbd camra, Other sensor  which can be mounted on the robot.
-This package contains some controllers, like teleop in an indoor worlds. Below we provide the instructions necessary for getting started with the navigation in the simulation world. 
+This package contains some controllers, like teleop in an indoor worlds, a joystick controller. Below we provide the instructions necessary for getting started with the navigation in the simulation world. 
 
 
 Installation
@@ -37,13 +37,13 @@ Note The first run of gazebo might take considerably long, as it will download s
 
 Getting the robot to move
 
-To let the robot move you need to send velocity command,  There are currently a few ways to send commands to the robot, we will show  them here. 
+To let the robot move you need to send velocity command,  There are currently a few ways to send commands to the robot, we will show  them here. We will also show how you can control the robot with a joystick.
 
 • Send direct velocities commands
 
 We will for now just send some constant command velocities to the robot by:
    
-     $rostopic pub /mobile_base_controller/cmd_vel geometry_msgs/Twist "linear: x: 1.0 y: 0.0 z: 0.0 angular: x: 0.0 y: 0.0 z: 0.0"  
+     $rostopic pub /ria_base_controller/cmd_vel geometry_msgs/Twist "linear: x: 1.0 y: 0.0 z: 0.0 angular: x: 0.0 y: 0.0 z: 0.0"  
 
 
 
@@ -52,6 +52,12 @@ We will for now just send some constant command velocities to the robot by:
 Now, we are goining to send the command to the robot via keypoard by typing the following:
         
         $ roslaunch e100_sim keyboard.launch 
+
+• Usage with a joystick
+
+Connect a USB joystick to your computer and launch the file:
+
+       $ roslaunch e100_teleop joy.launch 
         
 
 
@@ -63,9 +69,9 @@ First launch the robot in the  simulation world by:
 
        $ roslaunch e100_sim gazebo.launch 
 
-Now launch the keyboard node: 
+Now launch the joy node: 
              
-       $roslaunch e100_sim keyboard.launch
+       $roslaunch e100_teleop joy.launch
 
 Further, we need to launch the gmapping slam by:
 
