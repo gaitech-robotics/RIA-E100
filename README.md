@@ -2,7 +2,7 @@
 E100_sim Package
 
 E100_sim is a gazebo simulator. It provides the mobile base robot “ria_e100”  model  with simulated sensors such as the IMU, odometry sensor, and the rplidar, rgbd camra, Other sensor  which can be mounted on the robot.
-This package contains some controllers, like teleop in an indoor worlds, a joystick controller. Below we provide the instructions necessary for getting started with the navigation in the simulation world. 
+This package contains some controllers, like teleop in an indoor worlds. Below we provide the instructions necessary for getting started with the navigation in the simulation world. 
 
 
 Installation
@@ -37,7 +37,7 @@ Note The first run of gazebo might take considerably long, as it will download s
 
 Getting the robot to move
 
-To let the robot move you need to send velocity command,  There are currently a few ways to send commands to the robot, we will show  them here. We will also show how you can control the robot with a joystick.
+To let the robot move you need to send velocity command,  There are currently a few ways to send commands to the robot, we will show  them here. 
 
 • Send direct velocities commands
 
