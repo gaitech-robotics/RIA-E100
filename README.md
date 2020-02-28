@@ -97,7 +97,7 @@ It is recommended to save the map in the path:
 
 The last step is to launch the navigation file by: 
 
-      $ roslaunch e100_navigation navigation_sim.launch  
+      $ roslaunch e100_navigation navigation.launch  
 
 
 
