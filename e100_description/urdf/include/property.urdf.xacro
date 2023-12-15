@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<robot name="RIA-R100-properties" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
+
+  <xacro:property name="M_PI" value="3.1415926535897931"/>
+  <xacro:property name="WHEEL_SIZE" value="0.2"/>
+  <xacro:property name="WHEEL_X" value="0.26"/>
+  <xacro:property name="WHEEL_Y" value="0.33"/>
+  <xacro:property name="WHEEL_MESH" value="driven_wheel.stl"/>
+  <xacro:property name="OMNI_WHEEL_MESH" value="omni_wheel.stl"/>
+
+
+
+ </robot>

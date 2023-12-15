@@ -2,7 +2,7 @@
 <launch>
    
   <arg name="joy_config" default="logitech"/>
-  <arg name="joy_dev" default="/dev/input/js1"/>
+  <arg name="joy_dev" default="/dev/input/js0"/>
   <arg name="config_filepath" default="$(find e100_teleop)/config/$(arg joy_config).yaml"/>
 
   <!-- JOYSTICK teleop node -->
@@ -14,7 +14,7 @@
 
   <node pkg="teleop_twist_joy" name="teleop_twist_joy" type="teleop_node">
     <rosparam command="load" file="$(arg config_filepath)"/>
-    <remap from="/cmd_vel" to="/ria_base_controller/cmd_vel"/>
+    <remap from="/cmd_vel" to="/teleop/cmd_vel"/>
   </node>
 
 </launch>

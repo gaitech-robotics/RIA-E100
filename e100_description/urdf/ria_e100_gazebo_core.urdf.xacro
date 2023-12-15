@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<robot name="RIA-E100" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find e100_description)/urdf/ria_e100.urdf.xacro"/>
+
+
+  <xacro:macro name="ria_e100" params="base_hw_interface:=hardware_interface/VelocityJointInterface">
+
+
+  <gazebo reference="RIA_BASE">
+    <material>Gazebo/FlatBlack</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="RIA_TOP_FRAME">
+    <material>Gazebo/FlatBlack</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <transmission name="front_right_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_right_wheel_joint">
+      <hardwareInterface>${base_hw_interface}</hardwareInterface>
+    </joint>
+    <actuator name="front_right_wheel_motor">
+      <hardwareInterface>${base_hw_interface}</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <transmission name="front_left_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_left_wheel_joint">
+      <hardwareInterface>${base_hw_interface}</hardwareInterface>
+    </joint>
+    <actuator name="front_left_wheel_motor">
+      <hardwareInterface>${base_hw_interface}</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <gazebo reference="front_left_wheel">
+    <mu1 value="10"/>
+    <mu2 value="10"/>
+    <fdir1 value="1 0 0"/>
+    <kp value="10000000.0"/>
+    <kd>1.0</kd>
+    <maxVel>0.5</maxVel>
+    <material>Gazebo/Grey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="front_right_wheel">
+    <mu1 value="10"/>
+    <mu2 value="10"/>
+    <fdir1 value="1 0 0"/>
+    <kp value="10000000.0"/>
+    <kd>1.0</kd>
+    <maxVel>0.5</maxVel>
+    <material>Gazebo/Grey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="rear_left_wheel">
+    <material>Gazebo/FlatBlack</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <gazebo reference="rear_right_wheel">
+    <material>Gazebo/FlatBlack</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  </xacro:macro>  
+</robot>

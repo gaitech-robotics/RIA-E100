@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot name="RIA-E100-Materials" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
+
+  <material name="Dark_Grey">
+    <color rgba="0.2 0.2 0.2 1"/>
+  </material>
+
+  <material name="Army_Green">
+    <color rgba="0.4235 0.4862 0.3490 1"/>
+  </material>
+
+  <material name="Black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <material name="Red">
+    <color rgba="1 0 0 1"/>
+  </material>
+
+  <material name="Green">
+    <color rgba="0 1 0 1"/>
+  </material>
+
+</robot>

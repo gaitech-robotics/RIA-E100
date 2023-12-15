@@ -2,7 +2,7 @@
 <launch>
 
   <!-- RIA-E100 base model -->
-  <param name="robot_description" command="$(find xacro)xacro '$(find e100_description)/include/urdf/ria_e100.urdf.xacro'"/>
+  <param name="robot_description" command="$(find xacro)xacro '$(find e100_description)/urdf/ria_e100.urdf.xacro'"/>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 

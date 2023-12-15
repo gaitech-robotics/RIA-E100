@@ -22,8 +22,8 @@
     <param name="local_costmap/robot_base_frame" value="$(arg base_frame)"/>
     <param name="TebLocalPlannerROS/map_frame" value="$(arg global_frame)"/>
     <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>
-    <remap from="/cmd_vel" to="/ria_base_controller/cmd_vel"/>
-    <remap from="/odom" to="/ria_base_controller/odom"/>
+    <remap from="/cmd_vel" to="/move_base/cmd_vel"/>
+    <!--remap from="/odom" to="/odom"/-->
   </node>
 
 </launch>

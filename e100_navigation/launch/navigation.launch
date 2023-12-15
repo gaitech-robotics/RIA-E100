@@ -2,21 +2,12 @@
 <launch>
 
   <!-- Run Map Server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find e100_navigation)/maps/office_map.yaml">
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find e100_navigation)/maps/gaitech_office.yaml">
     <param name="frame_id" value="map"/>
   </node>
   
   <!-- Run AMCL -->
-  <!--if EKF is used Gmapping will use odom as its odom-frame , else use odom_laser-->
- <arg name="efk" default="$(env USE_EKF)"/>
-  <group if="$(eval arg('efk')==true)">
-    <include file="$(find e100_navigation)/launch/include/amcl.launch"/>
-    <!--include file="$(find e100_navigation)/launch/include/amcl_odom.launch.xml"/-->
-  </group>
-
-  <group if="$(eval arg('efk')==false)">
-    <include file="$(find e100_navigation)/launch/include/amcl_laser.launch.xml"/>
-  </group>
+  <include file="$(find e100_navigation)/launch/include/amcl.launch"/>
 
   <!-- Run Move Base -->
   <include file="$(find e100_navigation)/launch/move_base.launch"/>

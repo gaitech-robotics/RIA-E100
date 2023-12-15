@@ -1,7 +1,7 @@
 base_local_planner: teb_local_planner/TebLocalPlannerROS
 
 TebLocalPlannerROS:
-  odom_topic: ria_base_controller/odom
+  odom_topic: odom
   map_frame: map
      
   # Trajectory

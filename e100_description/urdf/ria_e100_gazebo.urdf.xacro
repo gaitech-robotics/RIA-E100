@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot name="ria_e100_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find e100_description)/urdf/ria_e100_gazebo_core.urdf.xacro"/>
+
+  <xacro:ria_e100 base_hw_interface="hardware_interface/VelocityJointInterface"/>
+
+  <gazebo>
+    <plugin name="ria_e100_control" filename="libgazebo_ros_control.so">
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>
+
+
+</robot>
